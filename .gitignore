@@ -1,4 +1,9 @@
 /vendor/
 /composer.lock
+
+# Ignore all . prefixed directories, except for .github for ci runners
 .*/
 !.github/
+
+# Ignore all cache files in root directory
+/*.cache
