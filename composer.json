@@ -1,0 +1,65 @@
+{
+    "name": "reddingwebdev/abuseipdb",
+    "description": "Framework-agnostic PHP client for the AbuseIPDB APIv2 (PSR-18), with an optional Symfony bundle.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jason J. Olson",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/reddingwebpro/abuseIpDb",
+    "support": {
+        "issues": "https://github.com/reddingwebpro/abuseIpDb/issues",
+        "source": "https://github.com/reddingwebpro/abuseIpDb"
+    },
+    "keywords": ["abuseipdb", "abuse", "ip", "blacklist", "security", "psr-18", "symfony"],
+    "require": {
+        "php": ">=7.4",
+        "php-http/discovery": "^1.19",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0",
+        "psr/http-message": "^1.1 || ^2.0",
+        "psr/log": "^1.1 || ^2.0 || ^3.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.14",
+        "nyholm/psr7": "^1.8",
+        "php-http/mock-client": "^1.6",
+        "phpstan/phpstan": "^1.10 || ^2.0",
+        "phpunit/phpunit": "^9.6",
+        "symfony/config": "^5.4 || ^6.4 || ^7.0 || ^8.0",
+        "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.0 || ^8.0",
+        "symfony/http-kernel": "^5.4 || ^6.4 || ^7.0 || ^8.0"
+    },
+    "suggest": {
+        "symfony/http-client": "PSR-18 HTTP client implementation (auto-discovered)",
+        "nyholm/psr7": "Lightweight PSR-7/PSR-17 implementation",
+        "symfony/framework-bundle": "To use the bundled Symfony integration"
+    },
+    "autoload": {
+        "psr-4": {
+            "AbuseIpDb\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AbuseIpDb\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --no-progress",
+        "cs": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -1,0 +1,11 @@
+parameters:
+    level: 8
+    phpVersion: 70400
+    paths:
+        - src
+        - tests
+    # Symfony dev deps may use newer PHP syntax than the 7.4 analysis target; covered by the bridge test.
+    excludePaths:
+        analyseAndScan:
+            - src/Bridge/Symfony/*
+            - tests/Unit/Bridge/Symfony/*

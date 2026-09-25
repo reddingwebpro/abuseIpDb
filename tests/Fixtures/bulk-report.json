@@ -1,0 +1,1 @@
+{"data":{"savedReports":60,"invalidReports":[{"error":"Duplicate IP","input":"41.188.138.68","rowNumber":5},{"error":"Invalid IP","input":"127.0.foo.bar","rowNumber":6}]}}

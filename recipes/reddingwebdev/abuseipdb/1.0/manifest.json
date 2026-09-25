@@ -1,0 +1,11 @@
+{
+    "bundles": {
+        "AbuseIpDb\\Bridge\\Symfony\\AbuseIpDbBundle": ["all"]
+    },
+    "copy-from-recipe": {
+        "config/": "%CONFIG_DIR%/"
+    },
+    "env": {
+        "ABUSEIPDB_API_KEY": ""
+    }
+}
