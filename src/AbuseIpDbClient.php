@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AbuseIpDb;
 
 use AbuseIpDb\Exception\AuthenticationException;
+use AbuseIpDb\Exception\InvalidArgumentException;
 use AbuseIpDb\Exception\NetworkException;
 use AbuseIpDb\Exception\PaymentRequiredException;
 use AbuseIpDb\Exception\RateLimitExceededException;
@@ -74,6 +75,7 @@ final class AbuseIpDbClient
      * @param int|null $maxAgeInDays only consider reports within this many days (1-365); falls back to the client's `default_max_age_in_days` option, then the API default
      * @param bool $verbose whether to include the reporter country and the last 10 reports in the response
      *
+     * @throws InvalidArgumentException if the IP address or parameters are invalid before any HTTP call is made
      * @throws ValidationException if the IP address or parameters are invalid
      * @throws AuthenticationException if the API key is missing or invalid
      * @throws PaymentRequiredException if the account's subscription does not allow this call
@@ -97,6 +99,7 @@ final class AbuseIpDbClient
      * @param int $page the 1-based page number to retrieve
      * @param int $perPage the number of reports per page
      *
+     * @throws InvalidArgumentException if the IP address or parameters are invalid before any HTTP call is made
      * @throws ValidationException if the IP address or parameters are invalid
      * @throws AuthenticationException if the API key is missing or invalid
      * @throws PaymentRequiredException if the account's subscription does not allow this call
@@ -121,6 +124,7 @@ final class AbuseIpDbClient
      *
      * @return BlacklistResult|string
      *
+     * @throws InvalidArgumentException if the request parameters are invalid before any HTTP call is made
      * @throws ValidationException if the request parameters are invalid
      * @throws AuthenticationException if the API key is missing or invalid
      * @throws PaymentRequiredException if the account's subscription does not allow this call (e.g. confidence/limit filters require a paid plan)
@@ -146,6 +150,7 @@ final class AbuseIpDbClient
      * @param string|null $comment optional free-text details about the abuse
      * @param \DateTimeInterface|null $timestamp optional time the abuse occurred; defaults to now when null
      *
+     * @throws InvalidArgumentException if the IP address, categories or other parameters are invalid before any HTTP call is made
      * @throws ValidationException if the IP address, categories or other parameters are invalid
      * @throws AuthenticationException if the API key is missing or invalid
      * @throws PaymentRequiredException if the account's subscription does not allow this call
@@ -167,6 +172,7 @@ final class AbuseIpDbClient
      * @param string $network the network in CIDR notation (e.g. `127.0.0.1/24`)
      * @param int|null $maxAgeInDays only consider reports within this many days (1-365); falls back to the client's `default_max_age_in_days` option, then the API default
      *
+     * @throws InvalidArgumentException if the network or parameters are invalid before any HTTP call is made
      * @throws ValidationException if the network or parameters are invalid
      * @throws AuthenticationException if the API key is missing or invalid
      * @throws PaymentRequiredException if the account's subscription does not allow this call
@@ -187,6 +193,7 @@ final class AbuseIpDbClient
      *
      * @param string|BulkReportParameters $csv file path, raw CSV contents or a prepared parameter object
      *
+     * @throws InvalidArgumentException if the CSV contents or parameters are invalid before any HTTP call is made
      * @throws ValidationException if the CSV contents or parameters are invalid
      * @throws AuthenticationException if the API key is missing or invalid
      * @throws PaymentRequiredException if the account's subscription does not allow this call
@@ -208,6 +215,7 @@ final class AbuseIpDbClient
      *
      * @param string $ip the IPv4 or IPv6 address whose reports should be cleared
      *
+     * @throws InvalidArgumentException if the IP address is invalid before any HTTP call is made
      * @throws ValidationException if the IP address is invalid
      * @throws AuthenticationException if the API key is missing or invalid
      * @throws PaymentRequiredException if the account's subscription does not allow this call
