@@ -230,6 +230,49 @@ final class IpGuard
 
 The service is also available as `abuse_ip_db.client`.
 
+### Troubleshooting: "Cannot autowire ... is type-hinted \"string\""
+
+If one of your own services or commands type-hints the raw API key directly, e.g.:
+
+```php
+final class AbuseReportCommand
+{
+    public function __construct(private string $abuseIpDbKey) {}
+}
+```
+
+you will get an error like:
+
+```
+Cannot autowire service "App\Command\AbuseReportCommand": argument "$abuseIpDbKey"
+of method "__construct()" is type-hinted "string", you should configure its value explicitly.
+```
+
+This is a general Symfony limitation, not specific to this bundle: [autowiring only works for object arguments](https://symfony.com/doc/current/service_container/autowiring.html#fixing-non-autowireable-arguments), so a bare scalar type-hint (`string`, `int`, `array`, etc.) can never be autowired, no matter how the value is exposed.
+
+- **Recommended:** type-hint `AbuseIpDbClient $abuseIpDb` instead (shown above) — this already autowires correctly and covers most use cases.
+- **If you truly need the raw key value** (the string API key is primarily meant for standalone, non-Symfony usage), the bundle exposes it as the `abuse_ip_db.api_key` container parameter, and you must wire it explicitly in your own service, either with the `#[Autowire]` attribute:
+
+  ```php
+  use Symfony\Component\DependencyInjection\Attribute\Autowire;
+
+  final class AbuseReportCommand
+  {
+      public function __construct(
+          #[Autowire('%abuse_ip_db.api_key%')] private string $abuseIpDbKey
+      ) {}
+  }
+  ```
+
+  or with `bind:` in your `config/services.yaml`:
+
+  ```yaml
+  services:
+      _defaults:
+          bind:
+              string $abuseIpDbKey: '%abuse_ip_db.api_key%'
+  ```
+
 ## Development
 
 ```bash

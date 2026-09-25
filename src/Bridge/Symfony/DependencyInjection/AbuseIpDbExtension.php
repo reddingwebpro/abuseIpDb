@@ -35,6 +35,11 @@ final class AbuseIpDbExtension extends Extension
             ->replaceArgument(0, $config['api_key'])
             ->replaceArgument(1, null !== $config['http_client'] ? new Reference($config['http_client']) : null)
             ->replaceArgument(4, $options);
+
+        // Exposed for consumers who need the raw key directly (e.g. via `bind:` or
+        // the `#[Autowire]` attribute). Symfony cannot autowire a bare scalar
+        // type-hint by type alone, so this parameter must be wired explicitly.
+        $container->setParameter('abuse_ip_db.api_key', $config['api_key']);
     }
 
     public function getAlias(): string

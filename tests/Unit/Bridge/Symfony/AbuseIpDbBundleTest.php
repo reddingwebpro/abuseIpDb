@@ -56,6 +56,16 @@ final class AbuseIpDbBundleTest extends TestCase
         $this->buildContainer([], new MockClient());
     }
 
+    public function testApiKeyIsExposedAsContainerParameter(): void
+    {
+        $container = $this->buildContainer([
+            'api_key' => 'secret',
+        ], new MockClient());
+
+        self::assertTrue($container->hasParameter('abuse_ip_db.api_key'));
+        self::assertSame('secret', $container->getParameter('abuse_ip_db.api_key'));
+    }
+
     /**
      * @param array<string, mixed> $config
      */
