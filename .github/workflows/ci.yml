@@ -8,22 +8,22 @@ on:
 jobs:
   composer-validate:
     name: Composer metadata
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.4'
           coverage: none
       - run: composer validate --strict
 
   tests:
     name: PHPUnit (PHP ${{ matrix.php }}${{ matrix.deps == 'lowest' && ', lowest deps' || '' }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4', '8.0', '8.1', '8.2', '8.3']
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
         deps: ['highest']
         include:
           - php: '7.4'
@@ -34,31 +34,31 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
-      - uses: ramsey/composer-install@v3
+      - uses: ramsey/composer-install@v4
         with:
           dependency-versions: ${{ matrix.deps }}
       - run: vendor/bin/phpunit
 
   phpstan:
     name: PHPStan
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.4'
           coverage: none
-      - uses: ramsey/composer-install@v3
+      - uses: ramsey/composer-install@v4
       - run: vendor/bin/phpstan analyse --no-progress
 
   cs:
     name: PHP-CS-Fixer
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.4'
           coverage: none
-      - uses: ramsey/composer-install@v3
+      - uses: ramsey/composer-install@v4
       - run: vendor/bin/php-cs-fixer fix --dry-run --diff
