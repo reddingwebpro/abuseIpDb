@@ -31,7 +31,8 @@
         "phpunit/phpunit": "^9.6",
         "symfony/config": "^5.4 || ^6.4 || ^7.0 || ^8.0",
         "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.0 || ^8.0",
-        "symfony/http-kernel": "^5.4 || ^6.4 || ^7.0 || ^8.0"
+        "symfony/http-kernel": "^5.4 || ^6.4 || ^7.0 || ^8.0",
+        "symfony/yaml": "^5.4 || ^6.4 || ^7.0 || ^8.0"
     },
     "suggest": {
         "symfony/http-client": "PSR-18 HTTP client implementation (auto-discovered)",
