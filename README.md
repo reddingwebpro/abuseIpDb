@@ -177,7 +177,7 @@ $client = new AbuseIpDbClient('YOUR_API_KEY', $psr18Client, $requestFactory, $st
 
 The bundle is optional and inert unless you register it (requires `symfony/framework-bundle` or `symfony/http-kernel` + `symfony/dependency-injection`).
 
-The Symfony Flex recipe source is maintained in this repository (see [recipes/README.md](recipes/README.md)) and is intended for submission to [`symfony/recipes-contrib`](https://github.com/symfony/recipes-contrib). Flex does not automatically consume recipe files from a package repository; the recipe becomes available to normal Flex installs once accepted and published in the contrib repository (with `composer config extra.symfony.allow-contrib true`). Until then, or if not using Flex, register the bundle and create the configuration manually as shown below.
+There is a Symfony Flex Recepie which has been created and submitted to Symfony for automatic prompting when you perform a `composer require` or `composer install` - this is currently pending, but once approved, the bundle will be automatically registered and configured for you. The only step required will be inserting your API Key either via the .env file or via Symfony Secrets.
 
 ```php
 // config/bundles.php
